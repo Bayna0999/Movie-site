@@ -6,7 +6,6 @@ import axios from "axios";
 
 export const Genres = () => {
   const [data, setData] = useState();
-
   useEffect(() => {
     axios
       .get(
@@ -22,6 +21,7 @@ export const Genres = () => {
       )
       .then((res) => setData(res.data.results));
   }, []);
+
   return (
     <div className="pl-[100px] ">
       <div className="w-screen flex justify-between ">
@@ -30,16 +30,15 @@ export const Genres = () => {
           see more <GrLinkNext />
         </button>
       </div>
-      <div className="inline-grid justify-between grid-cols-5 w-screen">
-        {data?.map((value, index) => {
+      <div className=" inline-grid  grid-cols-5 w-screen  ">
+        {data?.map((value:any, index:any) => {
           return (
             index < 10 && (
               <Card
                 key={index}
                 image={`https://image.tmdb.org/t/p/w300${value.poster_path}`}
                 rate={value.vote_average}
-                title={value.title}
-              />
+                title={value.title}/>
             )
           );
         })}

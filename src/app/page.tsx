@@ -8,7 +8,6 @@ export default function Home() {
     <div className="flex flex-col gap-[30px]">
       <Navbar />
       <Upcomingmovie />
-
       <div className="w-screen flex justify-between ">
         <Genres />
       </div>
