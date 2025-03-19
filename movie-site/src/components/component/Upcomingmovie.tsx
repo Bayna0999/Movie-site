@@ -8,7 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { CiStar } from "react-icons/ci";
 import { GoStarFill } from "react-icons/go";
 
 const MovieData = [
@@ -97,8 +96,12 @@ export const Upcomingmovie = () => {
             <img src={MovieData[2].image} alt="" className="w-screen " />
           </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <div className="flex pl-[120px]">
+          <CarouselPrevious />
+        </div>
+        <div className=" flex pr-[400px]">
+          <CarouselNext />
+        </div>
       </Carousel>
     </div>
   );
