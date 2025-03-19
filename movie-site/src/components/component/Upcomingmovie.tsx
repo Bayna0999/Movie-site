@@ -64,7 +64,7 @@ export const Upcomingmovie = () => {
               <img
                 src={MovieData[0].image}
                 alt=""
-                className="w-screen absolute z-0"
+                className="w-[100%] h-[600px] absolute z-0"
               />
               <div className="w-[404px] h-[40px] flex flex-col justify-start absolute z-10 gap-[10px] text-white my-[400px] mx-[200px]">
                 <p className="w-full">Now Playing:</p>
@@ -96,12 +96,10 @@ export const Upcomingmovie = () => {
             <img src={MovieData[2].image} alt="" className="w-screen " />
           </CarouselItem>
         </CarouselContent>
-        <div className="flex pl-[120px]">
-          <CarouselPrevious />
-        </div>
-        <div className=" flex pr-[400px]">
-          <CarouselNext />
-        </div>
+
+        <CarouselPrevious className="flex ml-[440px]" />
+
+        <CarouselNext className=" flex mr-[400px]" />
       </Carousel>
     </div>
   );
