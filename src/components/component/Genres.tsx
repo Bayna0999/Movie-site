@@ -23,7 +23,7 @@ export const Genres = () => {
   }, []);
 
   return (
-    <div className="pl-[100px] ">
+    <div className="pl-[100px] w-screen ">
       <div className="w-screen flex justify-between ">
         <p className="text-[24px]">Upcoming</p>
         <button className="flex items-center ">

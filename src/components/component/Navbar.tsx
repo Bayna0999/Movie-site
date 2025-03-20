@@ -13,7 +13,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { FiMoon } from "react-icons/fi";
 
-export const Navbar = () => {
+
+
+export const Navbar = ({darkmode}:{darkmode:any}) => {
   return (
     <div className="w-screen h-[44px] flex justify-center items-center bg-white">
       <div className="flex justify-between items-center bg-transparent w-max h-[36px] gap-[200px]">
@@ -27,7 +29,9 @@ export const Navbar = () => {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Genre</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <NavigationMenuLink>Link</NavigationMenuLink>
+                  <NavigationMenuLink>
+                    link
+                  </NavigationMenuLink>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -41,9 +45,9 @@ export const Navbar = () => {
             />
           </div>
         </div>
-        <div className="w-[36px] h-[36px] rounded-md border-[1px] border-[#E4E4E7] flex justify-center items-center">
+        <button className="w-[36px] h-[36px] rounded-md border-[1px] border-[#E4E4E7] flex justify-center items-center">
           <FiMoon />
-        </div>
+        </button>
       </div>
     </div>
   );
