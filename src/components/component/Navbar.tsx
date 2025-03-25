@@ -12,12 +12,9 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { FiMoon } from "react-icons/fi";
-const isTrue = true;
-const isLight = () => {
-  return isTrue != isTrue;
-};
+import { log } from "console";
 
-export const Navbar = ({ darkmode }: { darkmode: any }) => {
+export const Navbar = ({ onclick }: { onclick: any }) => {
   return (
     <div className="w-screen h-[44px] flex justify-center items-center bg-white">
       <div className="flex justify-between items-center bg-transparent w-max h-[36px] gap-[200px]">
@@ -46,7 +43,7 @@ export const Navbar = ({ darkmode }: { darkmode: any }) => {
           </div>
         </div>
         <button
-          onClick={isLight()}
+          onClick={onclick}
           className="w-[36px] h-[36px] rounded-md border-[1px] border-[#E4E4E7] flex justify-center items-center"
         >
           <FiMoon />
