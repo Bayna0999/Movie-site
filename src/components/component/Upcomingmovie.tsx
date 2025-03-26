@@ -31,20 +31,20 @@ export const Upcomingmovie = () => {
   }, []);
 
   return (
-    <div className="w-screen h-[1000px] flex justify-center items-center">
-      <Carousel className="">
-        <CarouselContent className="relative">
+    <div className=" w-screen flex justify-center items-center h-fit">
+      <Carousel className="h-fit">
+        <CarouselContent className="h-fit">
           {data?.map((value: any, index: number) => {
             return (
               index < 3 && (
-                <CarouselItem key={index} className="relative ">
+                <CarouselItem key={index} className="relative h-fit">
                   <img
                     src={`https://image.tmdb.org/t/p/original${value?.backdrop_path}`}
                     alt=""
-                    className="w-full h-full object-cover "
+                    className="w-full h-[800px] object-cover "
                   ></img>
-                  <div className="w-[404px] absolute h-[40px] flex flex-col justify-start gap-[10px] text-white ml-[400px] mr-[200px] ">
-                    <p className="w-full">Now Playing:</p>
+                  <div className="w-[404px] h-[40px] flex flex-col justify-start gap-[10px] text-white absolute top-[200px] left-[200px]">
+                    <p className="w-full text-black">Now Playing:</p>
                     <p className="w-full text-[36px] ">{value?.title}</p>
                     <div className=" flex w-full gap-[10px]">
                       <GoStarFill className="fill-yellow-400" />

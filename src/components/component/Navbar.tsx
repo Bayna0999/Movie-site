@@ -14,9 +14,9 @@ import {
 import { FiMoon } from "react-icons/fi";
 import { log } from "console";
 
-export const Navbar = ({ onclick }: { onclick: any }) => {
+export const Navbar = () => {
   return (
-    <div className="w-screen h-[44px] flex justify-center items-center bg-white">
+    <div className="w-screen h-[44px] flex justify-center items-center bg-white ">
       <div className="flex justify-between items-center bg-transparent w-max h-[36px] gap-[200px]">
         <div className="w-fit h-[20px] flex items-center gap-2.5">
           <BsFilm className="fill-indigo-700" />
@@ -42,10 +42,7 @@ export const Navbar = ({ onclick }: { onclick: any }) => {
             />
           </div>
         </div>
-        <button
-          onClick={onclick}
-          className="w-[36px] h-[36px] rounded-md border-[1px] border-[#E4E4E7] flex justify-center items-center"
-        >
+        <button className="w-[36px] h-[36px] rounded-md border-[1px] border-[#E4E4E7] flex justify-center items-center">
           <FiMoon />
         </button>
       </div>

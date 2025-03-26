@@ -3,13 +3,20 @@ import React, { useEffect, useState } from "react";
 import { Card } from "./Card";
 import { GrLinkNext } from "react-icons/gr";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
-export const Genres = () => {
+type GenreProps = {
+  api_genre: string;
+  title: string;
+  id: string;
+};
+
+export const Genres = ({ api_genre, title, id }: GenreProps) => {
   const [data, setData] = useState();
   useEffect(() => {
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1",
+        `https://api.themoviedb.org/3/movie/${api_genre}?language=en-US&page=1&api_key=d67d8bebd0f4ff345f6505c99e9d0289`,
         {
           method: "GET",
           headers: {
@@ -21,24 +28,30 @@ export const Genres = () => {
       )
       .then((res) => setData(res.data.results));
   }, []);
+  const router = useRouter();
+  const handeleOnclick = () => {
+    router.push(`details/1`);
+  };
 
   return (
-    <div className="pl-[100px] w-screen ">
-      <div className="w-screen flex justify-between ">
-        <p className="text-[24px]">Upcoming</p>
-        <button className="flex items-center ">
-          see more <GrLinkNext />
+    <div className="pl-[100px] w-screen items-center">
+      <div className="w-full flex justify-between ">
+        <p className="text-[24px]">{title}</p>
+        <button className="flex items-center justify-center gap-3">
+          See more <GrLinkNext />
         </button>
       </div>
-      <div className=" inline-grid  grid-cols-5 w-screen  ">
-        {data?.map((value:any, index:any) => {
+      <div className="flex flex-wrap w-screen  gap-8">
+        {data?.map((value: any, index: any) => {
           return (
             index < 10 && (
               <Card
+                jumpToDetails={handeleOnclick}
                 key={index}
                 image={`https://image.tmdb.org/t/p/w300${value.poster_path}`}
                 rate={value.vote_average}
-                title={value.title}/>
+                title={value.title}
+              />
             )
           );
         })}
