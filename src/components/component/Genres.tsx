@@ -8,11 +8,12 @@ import { useRouter } from "next/navigation";
 type GenreProps = {
   api_genre: string;
   title: string;
-  id: string;
 };
 
-export const Genres = ({ api_genre, title, id }: GenreProps) => {
+export const Genres = ({ api_genre, title }: GenreProps) => {
   const [data, setData] = useState();
+  const [getId, setGetId] = useState();
+
   useEffect(() => {
     axios
       .get(
@@ -29,8 +30,10 @@ export const Genres = ({ api_genre, title, id }: GenreProps) => {
       .then((res) => setData(res.data.results));
   }, []);
   const router = useRouter();
-  const handeleOnclick = () => {
-    router.push(`details/1`);
+
+  const handeleOnclick = (id: number) => {
+    console.log(id, "id");
+    router.push(`details/${id}`);
   };
 
   return (
@@ -46,7 +49,7 @@ export const Genres = ({ api_genre, title, id }: GenreProps) => {
           return (
             index < 10 && (
               <Card
-                jumpToDetails={handeleOnclick}
+                jumpToDetails={() => handeleOnclick(value.id)}
                 key={index}
                 image={`https://image.tmdb.org/t/p/w300${value.poster_path}`}
                 rate={value.vote_average}
