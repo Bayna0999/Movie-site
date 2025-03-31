@@ -1,42 +1,64 @@
 "use client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { GoStarFill } from "react-icons/go";
 import { GrLinkNext } from "react-icons/gr";
 import { useParams } from "next/navigation";
+import { axiosInstance, ImageUrl } from "@/lib/utils";
 
 export const MovieDetails = () => {
   const [getData, setGetData] = useState([]);
-  const [id, setId] = useState();
+  const [getSimilarData, setGetSimilarData] = useState([]);
+  const [getCredits, setGetCredits] = useState([]);
+  const params = useParams();
+
   const getMovieData = async () => {
     try {
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=d67d8bebd0f4ff345f6505c99e9d0289`
-      );
-      setGetData(data.results);
+      const { data } = await axiosInstance.get(`movie/972533?language=en-US`);
+      setGetData(data);
     } catch (err: any) {
       console.log(err.message);
     }
   };
+
+  const getSimilarMovieData = async () => {
+    try {
+      const { data } = await axiosInstance.get(
+        `movie/${params.id}/similar?language=en-US`
+      );
+      setGetSimilarData(data.crew);
+      console.log(data.results, "data");
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  const getCreditsData = async () => {
+    try {
+      const { data } = await axiosInstance.get(
+        `movie/${params.id}/credits?language=en-US`
+      );
+      setGetCredits(data.results);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  console.log(getData);
+  console.log(getSimilarData);
+  console.log(getCredits);
+
   useEffect(() => {
     getMovieData();
+    getSimilarMovieData();
+    getCreditsData();
   }, []);
-  console.log(getData);
-
-  const params = useParams<{ details: "details"; item: string }>();
-
-  // Route -> /shop/[tag]/[item]
-  // URL -> /shop/shoes/nike-air-max-97
-  // `params` -> { tag: 'shoes', item: 'nike-air-max-97' }
-  console.log("working");
-
-  console.log(params.details);
 
   return (
     <div className="justify-center items-center w-screen h-screen ">
       <div className="flex justify-between ">
         <div className="flex flex-col h-[68px] w-[211px]">
-          <p className="w-fulll h-10">{getData[0]}</p>
+          <p className="w-fulll h-10">{getData}</p>
           <p className="w-full h-7">{getData[0]}</p>
         </div>
         <div className="flex flex-col">
@@ -54,8 +76,14 @@ export const MovieDetails = () => {
         </div>
       </div>
       <div className="flex gap-5 ">
-        <img src="" className="rounded-sm w-[290px] h-[428px]" />
-        <img src="" className=" rounded-sm w-[760px] h-[428px]" />
+        <img
+          src={ImageUrl(getData?.poster_path)}
+          className="rounded-sm w-[290px] h-[428px]"
+        />
+        <img
+          src={ImageUrl(getData?.backdrop_path)}
+          className=" rounded-sm w-[760px] h-[428px]"
+        />
       </div>
       <div className="">
         <div className="w-full">gerne</div>
