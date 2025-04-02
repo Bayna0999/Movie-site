@@ -10,10 +10,9 @@ import {
 import { GoStarFill } from "react-icons/go";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { log } from "console";
 
 export const Upcomingmovie = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   useEffect(() => {
     axios
       .get(
@@ -29,7 +28,20 @@ export const Upcomingmovie = () => {
       )
       .then((res) => setData(res.data.results));
   }, []);
-
+  const watchTrailer = () => {
+    return (
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/lBimDKKNDDs?si=WPxpYnRQyNhSq5qT"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    );
+  };
   return (
     <div className=" w-screen flex justify-center items-center h-fit">
       <Carousel className="h-fit">
@@ -56,7 +68,10 @@ export const Upcomingmovie = () => {
                     <p className="w-[300px] h-auto text-[#FAFAFA] text-[12px]">
                       {value?.overview}
                     </p>
-                    <button className="flex justify-center items-center rounded-md w-[160px] h-[40px] pt-[8px] pr-[16px] pb-[8px] pl-[16px] text-black gap-[8px] font-inter bg-[#F4F4F5]">
+                    <button
+                      onClick={watchTrailer}
+                      className="flex justify-center items-center rounded-md w-[160px] h-[40px] pt-[8px] pr-[16px] pb-[8px] pl-[16px] text-black gap-[8px] font-inter bg-[#F4F4F5]"
+                    >
                       <CiPlay1 />
                       Watch Trailer
                     </button>

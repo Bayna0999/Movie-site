@@ -12,7 +12,6 @@ type GenreProps = {
 
 export const Genres = ({ api_genre, title }: GenreProps) => {
   const [data, setData] = useState();
-  const [getId, setGetId] = useState();
 
   useEffect(() => {
     axios
@@ -32,7 +31,6 @@ export const Genres = ({ api_genre, title }: GenreProps) => {
   const router = useRouter();
 
   const handeleOnclick = (id: number) => {
-    console.log(id, "id");
     router.push(`details/${id}`);
   };
 

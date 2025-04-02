@@ -10,10 +10,7 @@ type CardProps = {
 
 export const Card = ({ image, rate, title, jumpToDetails }: CardProps) => {
   return (
-    <div
-      onClick={jumpToDetails}
-      className="flex flex-col w-[230px] h-[420px] my-[30px]"
-    >
+    <div onClick={jumpToDetails} className="flex flex-col w-[230px] my-[30px]">
       <div className="w-[230px] h-[340px] ">
         <img className="w-full h-full rounded-t-md" src={image} />
       </div>

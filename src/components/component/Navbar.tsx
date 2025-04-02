@@ -13,8 +13,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { FiMoon } from "react-icons/fi";
 import { log } from "console";
+import { Genrebadge } from "./Genrebadge";
 
-export const Navbar = () => {
+export const Navbar = ({ onchange }: { onchange: () => void }) => {
   return (
     <div className="w-screen h-[44px] flex justify-center items-center bg-white ">
       <div className="flex justify-between items-center bg-transparent w-max h-[36px] gap-[200px]">
@@ -28,7 +29,9 @@ export const Navbar = () => {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Genre</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <NavigationMenuLink>link</NavigationMenuLink>
+                  <NavigationMenuLink>
+                    <Genrebadge />
+                  </NavigationMenuLink>
                 </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -39,6 +42,7 @@ export const Navbar = () => {
               type="text"
               className="w-[379px] h-[36px]"
               placeholder="Search.."
+              onChange={onchange}
             />
           </div>
         </div>
