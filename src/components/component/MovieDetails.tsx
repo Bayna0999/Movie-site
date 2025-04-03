@@ -66,10 +66,6 @@ export const MovieDetails = () => {
     }
   };
 
-  // console.log(getData, " getdata");
-  // console.log(getSimilarData, " getSimilardata");
-  // console.log(getCredits, " getdataCredits");
-
   useEffect(() => {
     getMovieData();
     getSimilarMovieData();

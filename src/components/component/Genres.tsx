@@ -11,7 +11,7 @@ type GenreProps = {
 };
 
 export const Genres = ({ api_genre, title }: GenreProps) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
