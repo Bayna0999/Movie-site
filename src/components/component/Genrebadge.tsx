@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { axiosInstance, Genres } from "@/lib/utils";
-
+import { useRouter } from "next/navigation";
+import { MdNavigateNext } from "react-icons/md";
 export const Genrebadge = () => {
   const [genres, setGenres] = useState<Genres[]>([]);
   const getGenre = async () => {
@@ -20,13 +21,17 @@ export const Genrebadge = () => {
   // const GenreFilter = ()=>{
   //   return
   // }
-
+  const router = useRouter();
+ const handleOnClick = (id:number)=>{
+  router.push(`/GenreFilter/${id}`);
+ }
   return (
-    <div className="flex flex-wrap gap-5">
+    <div className="w-[400px] h-fit flex flex-wrap gap-5">
       {genres.map((value, index) => {
         return (
-          <Badge key={index} variant="outline">
-            {value.name}
+          <Badge  onClick={()=>{
+            handleOnClick(value.id)}} key={index} >
+            {value.name + "   "}
           </Badge>
         );
       })}

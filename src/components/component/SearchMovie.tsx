@@ -10,8 +10,8 @@ type SearchProps = {
 
 export const SearchMovie = ({ Image, rate, date }: SearchProps) => {
   return (
-    <div className="w-[537px] h-[100px] bg-white flex gap-2">
-      <img src={Image} className="rounded-md" />
+    <div className="w-[537px] h-fit bg-white flex gap-2">
+      <img src={Image} className="rounded-md h-[100px]" />
       <div className="w-[454px] h-[87px]">
         <div className=" flex w-full gap-[10px] p-[10px]">
           <GoStarFill className="fill-yellow-400" />

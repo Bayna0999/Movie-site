@@ -1,6 +1,5 @@
 "use client";
-import axios from "axios";
-import React, { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { GoStarFill } from "react-icons/go";
 import { GrLinkNext } from "react-icons/gr";
 import { useParams, useRouter } from "next/navigation";
@@ -16,8 +15,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "./Card";
 
 export const MovieDetails = () => {
-  const router = useRouter();
-
+const router = useRouter();
+const [istrue,setIstrue] = useState(false);
+const [getTrailer,setGetTrailer] = useState<TrailerType[]>([]);
   const handeleOnclick = (id: number) => {
     router.push(`${id}`);
   };
@@ -31,6 +31,19 @@ export const MovieDetails = () => {
     cast: [],
     crew: [],
   });
+  type TrailerType = {
+            iso_639_1: string;
+            iso_3166_1: string;
+            name: string;
+            key: string;
+            site: string;
+            size: number;
+            type: string;
+            official: boolean;
+            published_at: string;
+            id: string;
+  }
+  
   const params = useParams();
 
   const getMovieData = async () => {
@@ -39,6 +52,16 @@ export const MovieDetails = () => {
         `movie/${params.id}?language=en-US`
       );
       setGetData(data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+  const getMovieTrailer = async () => {
+    try {
+      const { data } = await axiosInstance.get(
+        `movie/${params.id}/videos?language=en-US`
+      );
+      setGetTrailer(data.results);
     } catch (err: any) {
       console.log(err.message);
     }
@@ -70,12 +93,17 @@ export const MovieDetails = () => {
     getMovieData();
     getSimilarMovieData();
     getCreditsData();
+    getMovieTrailer();
   }, []);
   const directors = getCredits.crew.filter((el) => el.job === "Director");
   const Writers = getCredits.crew.filter((el) => el.job === "Writer");
   const Stars = getCredits.crew.filter(
     (el) => el.known_for_department === "Acting"
   );
+
+  const handleClick = ()=>{
+    return setIstrue(true);
+  }
   return (
     <div className="mx-[180px] flex flex-col gap-5 justify-center items-center ">
       <div className="flex justify-between w-full">
@@ -99,19 +127,29 @@ export const MovieDetails = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-5 w-full ">
+      <div className="flex gap-5 relative">
         <img
           src={ImageUrl(getData.poster_path)}
           className="rounded-sm w-[290px] h-[428px]"
         />
-        <div>
+        <div className="flex">
           <img
             src={ImageUrl(getData?.backdrop_path)}
-            className="rounded-sm object-cover  h-[428px] "
+            className="rounded-sm object-cover h-[428px] "
           />
-          <div>
-            <CiPlay1 />
-            <div className="">play trailer</div>
+          {
+              istrue && <iframe 
+              className="flex absolute top-[10%] left-[10%]"
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${getTrailer[0].key}?si=WPxpYnRQyNhSq5qT`}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            ></iframe>
+            }
+          <div onClick={handleClick} className="flex absolute bottom-10 left-100 gap-2">
+           <div className="bg-white size-[30px] rounded-[50%] flex items-center justify-center"><CiPlay1 className=" bg-white"/></div>
+            <div className="text-white">play trailer</div> 
           </div>
         </div>
       </div>

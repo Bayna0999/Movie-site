@@ -1,7 +1,7 @@
 "use client";
 import { Upcomingmovie, Navbar, Genres } from "@/components/component";
 import { GenreList } from "@/components/component/GenreList";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const [mode, setMode] = useState(0);

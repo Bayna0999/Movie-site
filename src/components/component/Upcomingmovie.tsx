@@ -13,6 +13,7 @@ import axios from "axios";
 
 export const Upcomingmovie = () => {
   const [data, setData] = useState([]);
+  const [isTrue,setIsTrue] = useState(false);
   useEffect(() => {
     axios
       .get(
@@ -29,18 +30,7 @@ export const Upcomingmovie = () => {
       .then((res) => setData(res.data.results));
   }, []);
   const watchTrailer = () => {
-    return (
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/lBimDKKNDDs?si=WPxpYnRQyNhSq5qT"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-    );
+    return (setIsTrue(true));
   };
   return (
     <div className=" w-screen flex justify-center items-center h-fit">
@@ -52,7 +42,6 @@ export const Upcomingmovie = () => {
                 <CarouselItem key={index} className="relative h-fit">
                   <img
                     src={`https://image.tmdb.org/t/p/original${value?.backdrop_path}`}
-                    alt=""
                     className="w-full h-[800px] object-cover "
                   ></img>
                   <div className="w-[404px] h-[40px] flex flex-col justify-start gap-[10px] text-white absolute top-[200px] left-[200px]">
@@ -69,11 +58,21 @@ export const Upcomingmovie = () => {
                       {value?.overview}
                     </p>
                     <button
-                      onClick={watchTrailer}
+                    onClick={watchTrailer}
                       className="flex justify-center items-center rounded-md w-[160px] h-[40px] pt-[8px] pr-[16px] pb-[8px] pl-[16px] text-black gap-[8px] font-inter bg-[#F4F4F5]"
                     >
                       <CiPlay1 />
                       Watch Trailer
+                     {
+                      isTrue && <iframe
+                      width="560"
+                      height="315"
+                      src="https://www.youtube.com/embed/lBimDKKNDDs?si=WPxpYnRQyNhSq5qT"
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      
+                    ></iframe>
+                     }
                     </button>
                   </div>
                 </CarouselItem>
